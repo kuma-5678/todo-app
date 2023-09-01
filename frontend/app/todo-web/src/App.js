@@ -1,7 +1,9 @@
 // import logo from './logo.svg';
 // import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Task from "./component/Task";
+import DetailTask from "./component/DetailTask";
 import{
   Center,
   Box,
@@ -52,6 +54,7 @@ const App = () => {
   }, []);
 
   return (
+    <Router>
     <Box mt="64px">
       <Center>
         <Box>
@@ -63,7 +66,7 @@ const App = () => {
           <Flex mb="24px">
             <Input
               placeholder="タスク名を入力"
-              value={name}
+              vvalue={name.substring(0, 7)}
               onChange={(e) => setName(e.target.value)}
             />
             <Box ml="16px">
@@ -74,12 +77,13 @@ const App = () => {
           </Flex>
           <CheckboxGroup>
             {tasks.map((task, index) => {
+              let displayedName = task.name.length > 7 ? task.name.substring(0,6) + "..." : task.name;
               return (
                 <Task
                   id={task.id}
                   key={index}
                   index={index}
-                  name={task.name}
+                  name={displayedName}
                   isDone={task.is_done}
                   toggleIsDone={toggleIsDone}
                   destroyTask={destroyTask}
@@ -90,6 +94,10 @@ const App = () => {
         </Box>
       </Center>
     </Box>
+    <Routes>
+      <Route path="/task/:id" element={<DetailTask />} />
+    </Routes>
+    </Router>
   );
 };
 
