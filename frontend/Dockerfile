@@ -2,7 +2,7 @@ FROM node:lts-slim
 
 WORKDIR /front
 
-COPY package*.json ./
+COPY package*.json fronted/app/todo-web
 RUN npm install
 
 COPY . .
