@@ -66,7 +66,7 @@ const App = () => {
           <Flex mb="24px">
             <Input
               placeholder="タスク名を入力"
-              vvalue={name.substring(0, 7)}
+              value={name.substring(0, 7)}
               onChange={(e) => setName(e.target.value)}
             />
             <Box ml="16px">
